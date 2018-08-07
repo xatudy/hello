@@ -1,0 +1,65 @@
+#include<stdio.h>
+
+void test(int*arr,size_t n)
+{
+  int i=0;
+  int j=0;
+  for(i;i<n-1;i++){
+     for(j;j<n-i-1;j++){
+       int tmp=0;
+       if(arr[j]>arr[j+1])
+       {
+       tmp=arr[j];
+       arr[j]=arr[j+1];
+       arr[j+1]=tmp;
+       }
+}
+}
+}
+
+int main(){
+
+  int arr[10]={9,8,7,6,5,4,3,2,1,0);
+  test(arr);
+  size_t n=sizeof(arr);
+  int i=0;
+  for(i;i<10;i++){
+  printf("%d\n",arr[i]);
+  }
+  system("pause");
+  return 0;
+}
+
+//它的时间复杂度非常容易理解:O(N^2)
+//有的数据循环几次时候整个数组其实已经排好序了，后面的循环其实
+
+//都是多余的操作我们程序员是一个追求效率的东西，所以呢我们要想办法解决掉这个问题, 这个时候我有这么一个想法，我们可不可
+
+//以这么想. 如果我循环一趟没有发生交换，那么这个数组整个就排好序了.这里认真想，如果你一趟下来下来没有交换任何数据，说明你
+
+//这个数组的每一个位置a[i]<a[i+1]，那么它肯定有序啊.所以我们可以使用一个标记变量，然后如果交换了就改变标记变量的值.如果内
+
+//循环一趟出来，标记变量没有变化那就是排好序了
+
+//优化
+
+void test(int *arr,size_t n){
+  int i=0;
+  int j=0;
+  int tmp;
+  int pos=1;
+  for(i;i<n-1;;i++){
+       if(pos=0)
+          break;
+       pos=0;
+  for(j;j<n-i-1;j++){
+      if(arr[j]>arr[j+1])
+             {
+             tmp=arr[j];
+             arr[j]=arr[j+1];
+             arr[j+1]=tmp;
+             pos=1;
+             } 
+  }
+  }
+}
