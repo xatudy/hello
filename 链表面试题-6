@@ -1,0 +1,18 @@
+查找单链表的中间节点，要求只能遍历一次链表
+
+//思想： 来两个指针 一个指针每次走两步 一个指针每次走一步 当走两步的指
+//针到达链表尾部时 走一步的指针刚好走了它的一般也就是中间位置
+ListNode* FindMid(ListNode *pFirst)
+{
+    ListNode *pSlow = pFirst;
+    ListNode *pFast = pFirst->pNext;
+    assert(pFirst);
+    while(pFast)
+    {
+        pSlow = pSlow->pNext;
+        pFast = pFast->pNext->pNext;
+    }
+    pSlow->pNext = NULL;
+
+    return pSlow;
+}
