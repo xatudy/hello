@@ -1,0 +1,24 @@
+逆置/反转单链表
+
+//要逆置链表就要将它的next指向它的前一个结点  然后让它的后一个结点的next 
+//指向它 但是问题来了 当我们让当前结点的next指向前一个结点时 我们就失去了
+//它后一个结点的控制权 因此我们在改变next之前因此我们应该先保留它原理来的next
+ListNode* ReverseList(ListNode* pHead)
+{
+     ListNode* pReversedHead = NULL;
+     ListNode* pNode = pHead;
+     ListNode* pPrev = NULL;
+     while(pNode != NULL)
+     {
+         ListNode* pNext = pNode->Next;
+         if(pNext == NULL)
+         {
+              pReversedHead = pNode;
+          } 
+          pNode->Next = pPrev;
+          pPrev = pNode;
+          pNode = pNext;
+     }
+
+     return pReversedHead;
+}
