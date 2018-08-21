@@ -1,0 +1,15 @@
+在无头单链表的一个节点前插入一个节点
+
+
+//这个和上一个题思想差不多  就是版插入的结点插到当前结点的后面然后交换
+//当前结点和插入结点的值即可
+void insert（ListNode* pos,DataType x）{
+     ListNode* newPos= new ListNode(x);
+     ListNode* cur=pos->next;
+     pos->next=newPos;
+     newPos->next->cur;
+     ListNode* tmp=pos;
+     DataType y=tmp->data;
+     pos->data=newPos->data;
+     newPos->data=y; 
+}
