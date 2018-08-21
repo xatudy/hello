@@ -1,0 +1,35 @@
+从尾到头打印单链表
+
+//们无法像是数组那样直接的逆序遍历，因为链表并不是一次性分配内存，
+//我们无法使用索引来获取链表中的值，所以我们只能是从头到尾的遍历链表，
+//然后我们的输出是从尾到头   类似于栈的后进先出
+void reversePrintList(ListNode* head)
+{
+   stack<ListNode*> sta;
+   if(head==NULL){
+      return;
+    }
+    ListNode* pNode=head;
+    while(pNode!=NULL){
+        sta.push(pNode->data);
+        pNode=pNode->next;
+    }
+    while(!sta.empty())   
+    {
+     printf(%d\n,sta.top());
+     sta.pop();
+    }
+}
+//////////////////////////////////////////////////////////////////
+//也可以使用递归来处理
+void reversePrintList(ListNode* head){
+       if（head==NULL||head->next==NULL）
+          { 
+             return;
+          }else{
+          reversePrintList(head->next);
+          printf(%d\n, head->data);
+          }   
+}
+//但使用递归就意味着可能发生栈溢出的风险，
+//尤其是链表非常长的时候。所以，基于循环实现的栈的鲁棒性要好一些。
