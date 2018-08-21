@@ -1,0 +1,15 @@
+删除一个无头单链表的非尾节点
+
+// 一般情况下我们删除只需要将它的前一个结点的next指向它的next 然后释放它自己
+//但是现在不知它的前一个 因此我们就需要转换一哈子 将它下一个结点的值赋给它 然后
+//删除它的下一个结点就OJBK.
+void delete(ListNode* pos)
+{
+   if(pos==NUll)
+     return;
+   ListNode* tmp=pos;
+   ListNode* pNext=pos->next;
+   tmp->data=pNext->data;
+   tmp->next=pNext->next;
+   free(pNext);
+}
