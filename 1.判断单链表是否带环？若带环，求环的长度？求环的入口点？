@@ -1,0 +1,74 @@
+1.判断单链表是否带环？
+
+```
+//判断是否带环 我们可以用快慢指针思想  我们来两个指针一个 一个每次走一步 
+//一个每次走两步 如果不带环那么它两走到最后是不会碰面的 反之 如果带环
+//那么它们迟早会碰面 
+
+ListNode* HaveLoop(ListNode* phead)
+{
+       if(pHead==NULL)
+          return NULL;
+       ListNode* fast=phead;
+       ListNode* slow=Phead;
+       while(fast&&fast->next){
+           fast=fast->next->next;
+           slow=slow->next;
+           if(slow==fast)
+              return slow;
+       }
+       return NUll;
+} 
+
+```
+2.如果链表带环求环的长度
+
+```
+//求换的长度  我们可以借助上面判断是否有环的返回值  你想想
+//链表有环 两个指针相遇那么肯定是在环内相 遇 记录慢指针的为主 那么我们
+//只需要来一个指针让它从慢指针走 然后再次回到慢指针的位置即可
+int lengthloop(ListNode* phead)
+{
+     ListNode* tmp=HaveLoop(phead);
+     int count=0;
+     if(tmp!=NULL){
+         ListNode* cur=tmp;
+         while(cur!=tmp)
+         {
+            cur=cur->next;
+            count++;
+         }
+     }
+   return count;
+}
+```
+3.如果链表带环 那么求环的入口点
+
+```
+//思路还是一样滴  快慢指针 先让两个指针都走 然后记录它们的相遇点 
+//此时快指针从新重新指向头结点 然后让慢指针从相遇点 快指针从头结点
+//一步一步走 那么它们再次相遇的点就是入口   （画图一幕了然）
+
+
+ ListNode* FindEntry(ListNode* pHead)
+{
+	 assert(pHead);
+	 SListNode* fast = pHead;
+	 SListNode*slow = pHead;
+	while (fast&&fast->next)  //让快指针追上慢指针
+	{
+		fast = fast->next->next; 
+		slow = slow->next;
+		if (fast == slow)
+		{
+			break;
+		}
+	}
+	fast = pHead;   //再让快指针指向头结点
+	while (fast != slow)  //两指针都走一步，当两指针在此相遇时，就是入口点
+	{
+		fast = fast->next;
+		slow = slow->next;
+	}
+	return fast;
+}
