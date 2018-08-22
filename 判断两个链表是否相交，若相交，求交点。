@@ -1,0 +1,63 @@
+4.判断两个链表是否相交，若相交，求交点。（假设链表不带环）
+
+```
+//思路一：我们先遍历到链表一到它的尾部 然后让它尾部指向链表二的头部
+//此时如果两个链表没有相交的话那么它们会变成一个链表 
+//如果它们相交的话那就相当于一个链表里有了环 
+//所以连接后就变成了判断是否带环问题  交点就是环的入口
+
+//思路二： 我们遍历两个链表 如果链表相加那么它们的最后一个结点必定是一样的
+//如果相同，则相交；否则不相交。
+//求交点可以这样搞 计算链表1与链表2的长度之差 然后让长链表先走差的绝对值步
+//然后一起走 当结点相同时 就是交点
+
+int length(ListNode* phead){  
+     if(phead==NULL)
+         return 0;
+      int count=0;
+      ListNode* cur=phead;
+      while(cur!=NULL){
+         cur=cur->next;
+         count++;
+      }
+      return count;
+}
+
+ListNode* ISintersect(ListNode* phead1,ListNode* phead2){
+        if(phead1==NULL||phead2==NULL)
+           return NULL;
+        int len1=length(phead1);
+        int len2=length(phead2);
+        ListNode* long=NULL;
+        ListNode* short=NULL;
+        ListNode* p1=phead1;
+        ListNode* p2=phead2;
+        while(p1!=NULL){
+           p1=p1->next;
+        }  
+        while(p2!=NULL)
+        {
+         p2=p2->next;
+        } 
+        if(p1!=NULL)
+           return NULL;
+        int count=(len1-len2)<0?(-1)*(len1-len2):(len1-len2);
+        if(len1>len2){
+           long=phead1;
+           short=phead2;
+        } else{
+           long=phead2;
+           short=phead1;
+        }
+        while(count)
+        {
+            long=long->next;
+            count--;
+        }
+        while(long!=short){
+           long=long->next;
+           short=short->next;
+        }
+     return long;
+}
+```
