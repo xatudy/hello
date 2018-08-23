@@ -1,0 +1,43 @@
+//这题我们可以先分情况捋一捋 第一种两个都不带换那么就按上一个题的方法解决
+//第二种 一个带环 一个不带环 这种情况它们可定不想交 如果相交那么就变成
+//两个链表都带环了 
+//第三种就是两个都带环了  这个又分两种 交点在环上 那么我们可以去掉环当成
+//无环问题解决求交点   如果交点在环上 那么就有可能有两个交点 得把两个都找出来
+
+ListNode* Istersect(ListNode* plist1, ListNode* plist2)
+{
+      if（plist1==NULL||plist2==NULL）
+         return NULL;
+    ListNode* enter1 = HaveLoop(plist1);//判断是否有环
+    ListNode* enter2 = HaveLoop(plist2);
+    ListNode* node1=FindEntry(plist1);
+    ListNode* node2=FindEntry(plist2);
+
+    if ((enter1 == NULL) && (enter2 == NULL))  //第一种情况
+    {
+        return ISintersect(plist1, plist2);
+    }
+
+    else if ((enter1 == NULL) && (enter2 != NULL) || (enter1 != NULL) && (enter2 == NULL)) //第二种情况
+    {
+        return NULL;
+    }
+    else if (node1 == node2) //第三种 当只有一个入口点时  交点就只有一个
+    {
+        node1->next = NULL;
+        node2->next = NULL;
+        return ISintersect(plist1, plist2);
+    }
+    else    //当有两个入口时 
+    {
+        ListNode* tmp = node1->next;
+        while (tmp != node1)
+        {
+            if (tmp == node2)
+            {
+                return enter1;
+            }
+            tmp = tmp->next;
+        }
+        return NULL;
+    }
