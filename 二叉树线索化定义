@@ -1,0 +1,22 @@
+enum PointerType //枚举类型  
+{  
+    THREAD,  //已线索化的  
+    LINK    //连接节点，未线索化.  
+};  
+template<class T>  
+struct BinaryTreeNodeThd  
+{  
+    BinaryTreeNodeThd<T>* _letf;  
+    BinaryTreeNodeThd<T>* _right;  
+    T _data;  
+    PointerType _leftType;  
+    PointerType _rightType;  
+  
+    BinaryTreeNodeThd(const T& x)  
+        :_data(x)  
+        , _letf(NULL)  
+        , _right(NULL)  
+        , _leftType(LINK)  
+        , _rightType(LINK)  
+    {}  
+};  
