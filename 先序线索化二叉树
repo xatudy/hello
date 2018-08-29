@@ -1,0 +1,24 @@
+void _PreOrderThreading(BiTreeNode*& Root)
+	{
+		if (Root == NULL)
+		{
+			return;
+		}
+		if (Root->pLeft == NULL) //没有左子树
+		{
+			 Root->pLeft = Prev;   //前驱
+			Root->Ltag = Thread;
+		}
+		if (Prev != NULL && Prev->pRight == NULL) // 上一个节点有没有  右子树
+		{  //Prev第一次进来 为空  
+			Prev->pRight = Root;   //后继
+			Prev->Rtag = Thread;
+		}
+		Prev = Root;//前驱  ， 每次记住上次的节点
+ 
+		//判断Root是否有左右孩子
+		if (Root->Ltag == Link)
+			_PreOrderThreading(Root->pLeft);
+		if (Root->Rtag == Link)
+			_PreOrderThreading(Root->pRight);
+	}
